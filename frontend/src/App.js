@@ -38,6 +38,30 @@ function App() {
     getNotes()
   }, [])
 
+  const onChangeColor = async (noteId, color) => {
+    try {
+      const response = await fetch(`http://localhost:4000/updateNoteColor/${noteId}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ color }),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update note color');
+      }
+  
+      setNotes((prevNotes) =>
+        prevNotes.map((note) =>
+          note._id === noteId ? { ...note, color: color } : note
+        )
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const deleteNote = async (entry) => {
     deleteNoteState(entry._id);
 
@@ -148,6 +172,7 @@ function App() {
                 entry={entry} 
                 editNote={editNote} 
                 deleteNote={deleteNote}
+                onChangeColor={onChangeColor}
                 />
               </div>
               )
