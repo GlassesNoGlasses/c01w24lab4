@@ -26,4 +26,5 @@
 - Tasks here
 
 ## Francis
-- Tasks here
+- Incorperated a new feature that adds the creation date to the note when created.
+- Displays the creation date above the note title.
