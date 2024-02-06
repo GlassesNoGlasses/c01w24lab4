@@ -16,7 +16,9 @@
 - Tasks here
 
 ## Sean
-- Tasks here
+- Fixed deleteNote() bug in server.js and App.js
+- Added backgroundColor attribute as orange
+- Added bug report on deleteNote()
 
 ## Alex
 - Tasks here
