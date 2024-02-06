@@ -23,7 +23,11 @@
 - Added bug report on deleteNote()
 
 ## Alex
-- Tasks here
+- Incorporated the search and filter feature with new component using code given in branchC.md
+- Refactored App.js to include the NoteSearch component
+- Rebased branch D into C
+- Resolved conflicts present after rebase
+- Committed and pushed according to handout instructions
 
 ## Francis
 - Incorperated a new feature that adds the creation date to the note when created.
