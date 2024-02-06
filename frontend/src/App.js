@@ -39,25 +39,51 @@ function App() {
     getNotes()
   }, [])
 
-  const deleteNote = async (entry) => {
-    deleteNoteState(entry._id);
-
+  const onChangeColor = async (noteId, color) => {
     try {
-      const response = await fetch(`http://localhost:4000/deleteNote/${entry._id}`, {
-        method: "DELETE",
+      const response = await fetch(`http://localhost:4000/updateNoteColor/${noteId}`, {
+        method: 'PATCH',
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
         },
+        body: JSON.stringify({ color }),
       });
   
       if (!response.ok) {
-        console.log("Server failed to delete the note:", response.status);
+        throw new Error('Failed to update note color');
       }
+  
+      setNotes((prevNotes) =>
+        prevNotes.map((note) =>
+          note._id === noteId ? { ...note, color: color } : note
+        )
+      );
     } catch (error) {
-      console.error("Delete function failed:", error);
+      console.error(error);
+    }
+  };
+
+  const deleteNote = async (entry) => {
+    try {
+      fetch(`http://localhost:4000/deleteNote/${entry._id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then(async (response) => {
+        if (!response.ok) {
+          console.log("Failed to delete note:", response.status);
+        } else {
+          // Update state after successful deletion //
+          deleteNoteState(entry._id);
+        }
+      });
+    } catch (error) {
+      console.log("Failed to delete note:", error);
     }
   }
-
+  
   const deleteAllNotes = async () => {
     try {
       await fetch(`http://localhost:4000/deleteAllNotes`, {
@@ -158,6 +184,7 @@ function App() {
                 entry={entry} 
                 editNote={editNote} 
                 deleteNote={deleteNote}
+                onChangeColor={onChangeColor}
                 />
               </div>
               )
