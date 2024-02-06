@@ -3,6 +3,7 @@
 #########################
 
 server.js) No delete functionality present. (No wonder it wasn't working!)
+
 App.js) deleteNoteState() invoked on 1st line of the function. 
 	This means no matter if the note is found, the frontend may desync w/ the backend or produce other unexpected behaviour.
 	deleteNoteState() should only be called if the response is ok. (i.e., response.ok == True)
