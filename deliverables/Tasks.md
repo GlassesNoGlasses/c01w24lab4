@@ -15,7 +15,9 @@
 - Handled merge conflicts.
 
 ## Zack
-- Tasks here
+- Added colour coding feature on branch A
+- Cherry-picked 2 commits from branch B 
+- Resolved conflicts with branch B
 
 ## Sean
 - Fixed deleteNote() bug in server.js and App.js
